@@ -89,13 +89,22 @@
             <span><strong id="bufferUser">Diğer izleyici</strong> bekleniyor (video yükleniyor)...</span>
           </div>
           <video id="videoPlayer" controls playsinline preload="auto"></video>
+          <div id="youtubeContainer" class="yt-container hidden">
+            <div id="ytInner"></div>
+          </div>
           <div id="autoplayOverlay" class="autoplay-overlay hidden">
             <button id="unlockAudioBtn" class="primary-btn">🔊 Sesi Aç ve Senkrona Katıl</button>
           </div>
           <div id="emptyState" class="empty-state">
             <div class="empty-icon">▶</div>
-            <p>Aşağıdan bir video linki ekle veya örnek videoyu dene.<br><small style="color:var(--muted)">Oda olmadan da izleyebilirsin, oda oluşturup birlikte de izleyebilirsin.</small></p>
-            <button id="loadSampleBtn" class="ghost-btn" style="margin-top: 12px; font-size: 13px;">Örnek Test Videosu Yükle</button>
+            <p>YouTube linki, .mp4, .m3u8 (HLS) veya doğrudan video linki yapıştır.</p>
+            <div class="empty-tags">
+              <span class="tag tag-green">✓ YouTube</span>
+              <span class="tag tag-green">✓ MP4 / WebM</span>
+              <span class="tag tag-green">✓ HLS (.m3u8)</span>
+              <span class="tag tag-red">✗ Netflix / Prime (DRM)</span>
+            </div>
+            <button id="loadSampleBtn" class="ghost-btn" style="margin-top: 14px; font-size: 13px;">Örnek Test Videosu Yükle</button>
           </div>
         </div>
 
@@ -125,6 +134,8 @@
 
     <script src="config.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="app.js"></script>
   </body>
 </html>
