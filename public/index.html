@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Sync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="background-glow glow-1"></div>
+    <div class="background-glow glow-2"></div>
+
+    <div class="app-shell">
+      <aside class="sidebar card">
+        <div class="brand-block">
+          <div class="brand-mark">♥</div>
+          <div>
+            <p class="eyebrow">watch together</p>
+            <h1>Movie Sync</h1>
+          </div>
+        </div>
+
+        <div class="auth-box">
+          <label for="nameInput">Adın</label>
+          <input id="nameInput" type="text" maxlength="18" value="Sevgilim" placeholder="Adın" />
+
+          <div class="room-actions">
+            <button id="createRoomBtn" class="primary-btn">Oda oluştur</button>
+            <button id="joinRoomBtn" class="ghost-btn">Odaya katıl</button>
+          </div>
+
+          <div class="join-row">
+            <input id="roomCodeInput" type="text" maxlength="5" placeholder="ODA KODU" />
+            <button id="quickJoinBtn" class="mini-btn">Git</button>
+          </div>
+
+          <div class="share-box hidden" id="shareBox">
+            <span>Paylaşılacak link</span>
+            <div class="share-link-row">
+              <input id="shareLinkInput" readonly value="" />
+              <button id="copyLinkBtn" class="mini-btn">Kopyala</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="status-panel">
+          <div class="status-line">
+            <span class="dot online"></span>
+            <span id="roomStatusText">Hazır</span>
+          </div>
+          <div class="room-code-wrap">
+            <span>Oda</span>
+            <strong id="roomCodeValue">-</strong>
+          </div>
+          <div class="role-pill" id="rolePill">Misafir</div>
+        </div>
+
+        <div class="chat-box card-panel">
+          <div class="chat-header">
+            <strong>Sohbet</strong>
+            <span id="chatCounter">0</span>
+          </div>
+          <div id="chatMessages" class="chat-messages"></div>
+          <div class="chat-input-row">
+            <input id="chatInput" type="text" maxlength="220" placeholder="Mesaj yaz..." />
+            <button id="sendChatBtn" class="mini-btn">Gönder</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="content card">
+        <div class="video-header">
+          <div>
+            <p class="eyebrow small">Aynı anda kesintisiz izleme</p>
+            <h2 id="movieTitle">Film başlatılmadı</h2>
+          </div>
+          <div class="badge" id="syncBadge">
+            <span class="badge-dot"></span>
+            <span id="syncDiffText">Salise Senkron</span>
+          </div>
+        </div>
+
+        <div class="video-stage">
+          <div id="bufferNotice" class="buffer-notice hidden">
+            <span class="spinner"></span>
+            <span><strong id="bufferUser">Diğer izleyici</strong> bekleniyor (video yükleniyor)...</span>
+          </div>
+          <video id="videoPlayer" controls playsinline preload="auto"></video>
+          <div id="autoplayOverlay" class="autoplay-overlay hidden">
+            <button id="unlockAudioBtn" class="primary-btn">🔊 Sesi Aç ve Senkrona Katıl</button>
+          </div>
+          <div id="emptyState" class="empty-state">
+            <div class="empty-icon">▶</div>
+            <p>Aşağıdan bir video linki ekle veya örnek videoyu dene.<br><small style="color:var(--muted)">Oda olmadan da izleyebilirsin, oda oluşturup birlikte de izleyebilirsin.</small></p>
+            <button id="loadSampleBtn" class="ghost-btn" style="margin-top: 12px; font-size: 13px;">Örnek Test Videosu Yükle</button>
+          </div>
+        </div>
+
+        <div class="controller-panel">
+          <div class="video-url-box">
+            <div class="label-row">
+              <label for="videoUrlInput">Video URL (Doğrudan .mp4, .webm veya stream linki)</label>
+              <span class="tip-text">YouTube/Netflix linki doğrudan oynatılamaz</span>
+            </div>
+            <div class="video-url-row">
+              <input id="videoUrlInput" type="url" placeholder="https://.../video.mp4" />
+              <button id="loadVideoBtn" class="primary-btn dark">Yükle</button>
+            </div>
+          </div>
+
+          <div class="controls-row">
+            <div class="mini-actions">
+              <button id="playBtn" class="secondary-btn">▶ Oynat</button>
+              <button id="pauseBtn" class="secondary-btn">⏸ Duraklat</button>
+              <button id="syncBtn" class="secondary-btn">🔄 Tam Senkronize Et</button>
+            </div>
+            <div id="playbackSpeedBadge" class="speed-badge">Hız: 1.00x</div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
